@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ titulo or 'Animais para adoção' }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="{{ url_for('inicio') }}">Adote um amigo</a>
+    <nav>
+      <a href="{{ url_for('inicio') }}">Animais</a>
+      <a class="btn btn-primario" href="{{ url_for('cadastrar') }}">Cadastrar animal</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% with mensagens = get_flashed_messages() %}
+      {% if mensagens %}
+        <ul class="avisos" role="status">
+          {% for mensagem in mensagens %}
+            <li>{{ mensagem }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% block conteudo %}{% endblock %}
+  </main>
+</body>
+</html>
